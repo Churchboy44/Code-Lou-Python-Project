@@ -36,7 +36,7 @@ def read_grab_names(): # returns player names from golfGame.txt
 def read_grab_scores(): # returns list with strokes from each hole
     with open(temp_file_name, "r") as f:
         contents = f.read()
-        golf_scores = re.findall(r'[1-9]+', contents)
+        golf_scores = re.findall(r'[0-9]+', contents)
 
         p1_score = 0
         for num in golf_scores[0]: # if findall = [('1','2','3'), ('4','5','6')]
@@ -49,18 +49,35 @@ def read_grab_scores(): # returns list with strokes from each hole
         return p1_score, p2_score
 
 
+# ------ user input section ------
 p1 = input("Please enter player 1's name: ").split() #split turns p1 into list and ensures p1[0] is the whole input
 p2 = input("Please enter the second player's name: ").split()
 
 hole_num = 1
+answer = ''
 while True:
     answer = input('How many strokes did {} make on hole {}? Enter "done" to quit: '.format(p1[0], hole_num))
     if answer.lower() == 'done': #game-ending condition
         break
     else:
-        p1.append((answer))
+        try: # if answer can't be changed to an int, this keeps it from being added to p1
+            int(answer)
+        except ValueError:
+            print("Oops, that's not a number, please try again!")
+            continue
+        else:
+            p1.append(answer)
 
-    p2.append(input('How many strokes did {} make on hole {}? '.format(p2[0], hole_num)))
+    try:
+        answer = input('How many strokes did {} make on hole {}? '.format(p2[0], hole_num))
+        int(answer)        
+    except ValueError:
+        print("Oops, that's not a number, please try again and ENTER 0 for {}'s next value!\n".format(p1[0]))
+        continue # Yes, I'm relying on the user to read the instructions,
+                 # I don't know how to skip p1's section to get back to here
+    else:
+        p2.append(answer)
+
     print() #\n after the hole is done for readability
     hole_num += 1
 
