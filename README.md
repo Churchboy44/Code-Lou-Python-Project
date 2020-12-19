@@ -2,7 +2,7 @@
 
 Author: Stephen Lorenz
 
----Info---
+### Info
 
 golfTracker.py is a simple program that asks the user for the names of 2 golf players
 then asks for the number of strokes they made on each hole, storing the name and
@@ -16,7 +16,7 @@ loser's names (read from the .txt) and their respective scores. I know this isn'
 the most efficient way to do this, but I needed regex practice and a 3rd requirement
 to meet.
 
----Chosen Requirements---
+### Chosen Requirements
 
 * Implement a “master loop” console application where the user can repeatedly enter
 commands/perform actions, including choosing to exit the program
